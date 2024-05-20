@@ -1,27 +1,27 @@
 // import 'antd/dist/rest.css';
 import { useState } from 'react';
 import './App.css';
-import { Input } from 'antd';
-import { UserOutlined, EyeFilled, EyeInvisibleFilled } from '@ant-design/icons';
+import { Select } from 'antd';
 
 function App() {
-  const [loading, setLoading] = useState(false);
-  const onButtonClicked = (e) => {
-    console.log('Button Clicked');
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  };
+  const fruits = ['Banana', 'mango', 'orange', 'cherry'];
   return (
     <div className="App">
       <header className="App-header">
-        <Input.Search
-          placeholder="Name"
-          maxLength={10}
-          prefix={<UserOutlined />}
-          allowClear
-        ></Input.Search>
+        <p>Which is your Favorite fruit?</p>
+        <Select
+          mode="multiple"
+          placeholder="Select Fruit"
+          style={{ width: '50%' }}
+        >
+          {fruits.map((fruit, index) => {
+            return (
+              <Select.Option key={index} value={index}>
+                {fruit}
+              </Select.Option>
+            );
+          })}
+        </Select>
       </header>
     </div>
   );
