@@ -16,16 +16,12 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Input
+        <Input.Search
           placeholder="Name"
           maxLength={10}
           prefix={<UserOutlined />}
-        ></Input>
-        <Input
-          placeholder="password"
-          type="password"
-          prefix={<EyeFilled />}
-        ></Input>
+          allowClear
+        ></Input.Search>
       </header>
     </div>
   );
