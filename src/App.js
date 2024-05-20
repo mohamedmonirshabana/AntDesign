@@ -97,6 +97,9 @@ function App() {
             onSelect: (record) => {
               console.log({ record });
             },
+            getCheckboxProps: (record) => ({
+              disabled: record.grade === 'C+',
+            }),
           }}
         ></Table>
       </header>
