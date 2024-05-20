@@ -100,6 +100,7 @@ function App() {
             getCheckboxProps: (record) => ({
               disabled: record.grade === 'C+',
             }),
+            hideSelectAll: true,
           }}
         ></Table>
       </header>
