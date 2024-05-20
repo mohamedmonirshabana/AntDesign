@@ -11,6 +11,8 @@ function App() {
         <p>Which is your Favorite fruit?</p>
         <Select
           mode="multiple"
+          maxTagCount={2}
+          allowClear
           placeholder="Select Fruit"
           style={{ width: '50%' }}
         >
