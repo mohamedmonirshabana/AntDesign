@@ -87,7 +87,12 @@ function App() {
           columns={columns}
           dataSource={dataSource}
           pagination={false}
-          rowSelection={true}
+          rowSelection={{
+            type: 'radio',
+            onSelect: (record) => {
+              console.log({ record });
+            },
+          }}
         ></Table>
       </header>
     </div>
