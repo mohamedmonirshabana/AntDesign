@@ -1,23 +1,21 @@
 // import 'antd/dist/rest.css';
 import { useState } from 'react';
 import './App.css';
-import { Button, Spin } from 'antd';
+import { Progress } from 'antd';
 
 function App() {
-  const [spinPlay, setSpinPlay] = useState(true);
-  const changeSpin = () => {
-    setSpinPlay((preValue) => !preValue);
-  };
   return (
     <div className="App">
       <header className="App-header">
-        <Spin spinning={spinPlay}></Spin>
-        <Button onClick={changeSpin}>Toggle Button</Button>
-        <Spin spinning={spinPlay}>
-          <p>P tag 1</p>
-          <p>P tag 2</p>
-          <p>P tag 3</p>
-        </Spin>
+        <Progress percent={33} />
+        <Progress percent={33} type="circle" />
+        <Progress percent={33} type="line" strokeColor="red" />
+        <Progress percent={33} type="line" strokeColor="red" strokeWidth={50} />
+        <Progress percent={33} type="line" strokeColor="red" status="active" />
+        <Progress percent={33} type="circle" status="success" />
+        <Progress percent={33} type="circle" status="exception" />
+        <Progress percent={33} type="line" status="success" />
+        <Progress percent={33} type="line" status="success" steps={3} />
       </header>
     </div>
   );
