@@ -63,21 +63,21 @@ function App() {
       grade: 'B+',
     },
     {
-      key: '4',
-      id: 4,
-      name: 'Student 4',
-      grade: 'F+',
-    },
-    {
       key: '5',
       id: 5,
       name: 'Student 5',
-      grade: 'A+',
+      grade: 'F+',
     },
     {
       key: '6',
       id: 6,
       name: 'Student 6',
+      grade: 'A+',
+    },
+    {
+      key: '7',
+      id: 7,
+      name: 'Student 7',
       grade: 'D+',
     },
   ];
@@ -97,10 +97,48 @@ function App() {
             onSelect: (record) => {
               console.log({ record });
             },
-            getCheckboxProps: (record) => ({
-              disabled: record.grade === 'C+',
-            }),
-            hideSelectAll: true,
+            // getCheckboxProps: (record) => ({
+            //   disabled: record.grade === 'C+',
+            // }),
+            hideSelectAll: false,
+            selections: [
+              Table.SELECTION_NONE,
+              Table.SELECTION_ALL,
+              Table.SELECTION_INVERT,
+              {
+                key: 'even',
+                text: 'Select Even Rows',
+                onSelect: (allKeys) => {
+                  const selectedKeys = allKeys.filter((key) => {
+                    return key % 2 === 0;
+                  });
+                  setAlreadySelectedRows(selectedKeys);
+                },
+              },
+              {
+                key: 'odd',
+                text: 'Select ODD Rows',
+                onSelect: (allKeys) => {
+                  const selectedKeys = allKeys.filter((key) => {
+                    return key % 2 != 0;
+                  });
+                  setAlreadySelectedRows(selectedKeys);
+                },
+              },
+              {
+                key: 'excellent',
+                text: 'Select Excellent Rows',
+                onSelect: (allKeys) => {
+                  const selectedKeys = allKeys.filter((key) => {
+                    const isExcellent = dataSource.find((student) => {
+                      return student.key === key && student.grade.includes('A');
+                    });
+                    return isExcellent;
+                  });
+                  setAlreadySelectedRows(selectedKeys);
+                },
+              },
+            ],
           }}
         ></Table>
       </header>
