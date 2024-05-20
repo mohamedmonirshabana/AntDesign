@@ -1,22 +1,31 @@
-import logo from './logo.svg';
+// import 'antd/dist/rest.css';
+import { useState } from 'react';
 import './App.css';
+import { Button } from 'antd';
+import { PoweroffOutlined } from '@ant-design/icons';
 
 function App() {
+  const [loading, setLoading] = useState(false);
+  const onButtonClicked = (e) => {
+    console.log('Button Clicked');
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  };
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Button
+          type="primary"
+          block
+          loading={loading}
+          icon={<PoweroffOutlined />}
+          className="my-button"
+          onClick={onButtonClicked}
         >
-          Learn React
-        </a>
+          My First Button
+        </Button>
       </header>
     </div>
   );
