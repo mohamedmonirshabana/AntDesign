@@ -45,6 +45,7 @@ function App() {
           loading={loading}
           columns={columns}
           dataSource={datSource}
+          pagination={true}
         ></Table>
       </header>
     </div>
