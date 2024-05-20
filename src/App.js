@@ -4,6 +4,7 @@ import './App.css';
 import { Table, Tag } from 'antd';
 
 function App() {
+  const [alreadySelectedRows, setAlreadySelectedRows] = useState(['1', '3']);
   const columns = [
     {
       title: 'Student ID',
@@ -88,7 +89,11 @@ function App() {
           dataSource={dataSource}
           pagination={false}
           rowSelection={{
-            type: 'radio',
+            type: 'checkbox',
+            selectedRowKeys: alreadySelectedRows,
+            onChange: (keys) => {
+              setAlreadySelectedRows(keys);
+            },
             onSelect: (record) => {
               console.log({ record });
             },
