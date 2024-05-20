@@ -1,71 +1,93 @@
 // import 'antd/dist/rest.css';
 import { useEffect, useState } from 'react';
 import './App.css';
-import { Table } from 'antd';
+import { Table, Tag } from 'antd';
 
 function App() {
-  const [loading, setLoading] = useState(false);
-  const [datSource, setDataSource] = useState([]);
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
-
-  useEffect(() => {
-    setLoading(true);
-    fetch('https://jsonplaceholder.typicode.com/todos', { method: 'GET' })
-      .then((response) => response.json())
-      .then((data) => {
-        setDataSource(data);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
   const columns = [
     {
-      key: '1',
-      title: 'ID',
+      title: 'Student ID',
       dataIndex: 'id',
     },
     {
-      key: '2',
-      title: 'user Id',
-      dataIndex: 'userId',
-      sorter: (record1, record2) => {
-        return record1.userId > record2.userId;
+      title: 'Student Name',
+      dataIndex: 'name',
+    },
+    {
+      title: 'Student Grade',
+      dataIndex: 'grade',
+      render: (tag) => {
+        const color = tag.includes('A')
+          ? 'Green'
+          : tag.includes('B')
+          ? 'Blue'
+          : tag.includes('C')
+          ? 'Yellow'
+          : tag.includes('D')
+          ? 'Tomato'
+          : tag.includes('F')
+          ? 'Red'
+          : '';
+        return (
+          <Tag color={color} key={tag}>
+            {tag}
+          </Tag>
+        );
       },
+    },
+  ];
+  const dataSource = [
+    {
+      key: '1',
+      id: 1,
+      name: 'Student 1',
+      grade: 'A+',
+    },
+    {
+      key: '2',
+      id: 2,
+      name: 'Student 2',
+      grade: 'A+',
     },
     {
       key: '3',
-      title: 'Status',
-      dataIndex: 'completed',
-      render: (completed) => {
-        return <p>{completed ? 'complete' : 'In progress'}</p>;
-      },
-      filters: [
-        { text: 'Complete', value: true },
-        { text: 'In Prograss', value: false },
-      ],
-      onFilter: (value, record) => {
-        return record.completed === value;
-      },
+      id: 3,
+      name: 'Student 3',
+      grade: 'C+',
+    },
+    {
+      key: '4',
+      id: 4,
+      name: 'Student 4',
+      grade: 'B+',
+    },
+    {
+      key: '4',
+      id: 4,
+      name: 'Student 4',
+      grade: 'F+',
+    },
+    {
+      key: '5',
+      id: 5,
+      name: 'Student 5',
+      grade: 'A+',
+    },
+    {
+      key: '6',
+      id: 6,
+      name: 'Student 6',
+      grade: 'D+',
     },
   ];
   return (
     <div className="App">
       <header className="App-header">
         <Table
-          loading={loading}
           columns={columns}
-          dataSource={datSource}
-          pagination={{
-            current: page,
-            pageSize: pageSize,
-            total: 500,
-            onChange: (page, pageSize) => {
-              setPage(page);
-              setPageSize(pageSize);
-            },
-          }}
+          dataSource={dataSource}
+          pagination={false}
+          rowSelection={true}
         ></Table>
       </header>
     </div>
