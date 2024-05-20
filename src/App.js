@@ -1,7 +1,7 @@
 // import 'antd/dist/rest.css';
 import { useState } from 'react';
 import './App.css';
-import { Button } from 'antd';
+import { Input } from 'antd';
 import { PoweroffOutlined } from '@ant-design/icons';
 
 function App() {
@@ -16,16 +16,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Button
-          type="primary"
-          block
-          loading={loading}
-          icon={<PoweroffOutlined />}
-          className="my-button"
-          onClick={onButtonClicked}
-        >
-          My First Button
-        </Button>
+        <Input placeholder="Name" maxLength={10} type="password"></Input>
       </header>
     </div>
   );
