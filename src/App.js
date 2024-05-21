@@ -1,10 +1,12 @@
 // import 'antd/dist/rest.css';
 import { useEffect, useState } from 'react';
 import './App.css';
-import { Table, Button, Modal } from 'antd';
+import { Table, Button, Modal, Input } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
 function App() {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingStudent, setEditingStudent] = useState(null);
   const [dataSource, setDataSource] = useState([
     {
       id: 1,
@@ -59,6 +61,9 @@ function App() {
         return (
           <>
             <EditOutlined
+              onClick={() => {
+                onEditStudent(record);
+              }}
               style={{ fontSize: '18px', color: 'blue', margin: '0 8px' }}
             />
             <DeleteOutlined
@@ -98,11 +103,56 @@ function App() {
       },
     });
   };
+  const onEditStudent = (record) => {
+    setIsEditing(true);
+    setEditingStudent({ ...record });
+  };
+  const resetEditing = () => {
+    setIsEditing(false);
+    setEditingStudent(null);
+  };
   return (
     <div className="App">
       <header className="App-header">
         <Button onClick={onAddStudent}>Add a new Studet</Button>
         <Table dataSource={dataSource} columns={columns}></Table>
+        <Modal
+          title="Edit Student"
+          visible={isEditing}
+          okText="Save"
+          onCancel={() => {
+            resetEditing();
+            setIsEditing(false);
+          }}
+          onOk={() => {
+            setIsEditing(false);
+          }}
+        >
+          <Input
+            value={editingStudent?.name}
+            onChange={(e) => {
+              setEditingStudent((pre) => {
+                return { ...pre, name: e.target.value };
+              });
+            }}
+          />
+          <Input
+            value={editingStudent?.email}
+            onChange={(e) => {
+              setEditingStudent((pre) => {
+                return { ...pre, email: e.target.value };
+              });
+            }}
+          />
+          <Input
+            value={editingStudent?.address}
+            onChange={(e) => {
+              setEditingStudent((pre) => {
+                return { ...pre, address: e.target.value };
+              });
+            }}
+          />
+        </Modal>
       </header>
     </div>
   );
