@@ -122,10 +122,18 @@ function App() {
           okText="Save"
           onCancel={() => {
             resetEditing();
-            setIsEditing(false);
           }}
           onOk={() => {
-            setIsEditing(false);
+            setDataSource((pre) => {
+              return pre.map((student) => {
+                if (student.id === editingStudent.id) {
+                  return editingStudent;
+                } else {
+                  return student;
+                }
+              });
+            });
+            resetEditing();
           }}
         >
           <Input
